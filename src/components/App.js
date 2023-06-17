@@ -1,18 +1,35 @@
-const counterReducer = (state,action) =>{
+counter with reducer
 
-    switch(action.type){
-        case "INCREMENT":
-            return {counter : state.counter +1};
-        case "DECREMENT":
-             return  {counter: state.counter-1}
-                
-        default :
-           return state;
+Counter reducer
 
-    }
+import React, { useReducer } from 'react'
+import { counterReducer } from '../reducers/counterReducer';
+import '../styles/App.css';
 
+const initialState = {
+  counter:0
+}
+const App = () => {
+const [state,dispatch] = useReducer(counterReducer,initialState)
 
-
+const handleIncre = () =>{
+  dispatch({type: "INCREMENT"});
 }
 
-export {counterReducer}
+const hnadleDecre = () =>{
+  dispatch({type : "DECREMENT"})
+}
+
+
+  return (
+    <div id="main">
+       <span id='counter'>{state.counter}</span>
+      <button id='increment-btn' onClick={handleIncre}>Increment</button>
+      <button id='decrement-btn' onClick={hnadleDecre}>Decrement</button>
+
+    </div>
+  )
+}
+
+
+export default App;
